@@ -50,10 +50,4 @@ Product detail pages were added (`product-1.html` ... `product-4.html`). Clickin
 ## Notes
 - Comments are placed in `index.html` and `css/styles.css` to explain structure and styles.
 - To customize: update CSS variables at the top of `css/styles.css`.
-
----
-
-If you'd like, I can also:
-- Add locally stored demo images
-- Create a small screenshot utility (HTML + CSS) to show mobile/desktop mocks
-- Add more product content and modal product detail views
+*
