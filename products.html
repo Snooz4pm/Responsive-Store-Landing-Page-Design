@@ -3,121 +3,86 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Responsive Store Landing Page</title>
-  <!-- Google Font -->
+  <title>Products — Store</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <!-- Bootstrap (for extra points) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom Styles -->
   <link rel="stylesheet" href="css/styles.css">
-  <!-- Fallback for old browsers (optional) -->
-  <!-- <script src="https://polyfill.io/v3/polyfill.min.js"></script> -->
 </head>
 <body>
-  <!-- Header with navigation -->
-  <!-- Header using Bootstrap navbar for better responsiveness -->
   <header class="site-header">
     <nav class="navbar navbar-expand-md bg-transparent">
       <div class="container">
-        <a class="navbar-brand brand" href="#">Store<span class="dot">.</span></a>
+        <a class="navbar-brand brand" href="index.html">Store<span class="dot">.</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon">☰</span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav ms-auto mb-2 mb-md-0 align-items-center">
-            <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#hero">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" href="products.html">Products</a></li>
             <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-            <li class="nav-item ms-md-3"><a class="btn btn-primary" href="products.html">Shop</a></li>
+            <li class="nav-item ms-md-3"><a class="btn btn-primary" href="#products">Shop</a></li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
 
-  <!-- Hero / Intro -->
-  <section id="hero" class="hero text-center py-5">
+  <main class="py-5">
     <div class="container">
-      <h1 class="display-5">Stylish Products for Everyday Life</h1>
-      <p class="lead mb-4">Discover high-quality products crafted to bring comfort and style into your home. Free shipping on orders over $50.</p>
-      <a class="btn btn-lg btn-primary" href="products.html">Shop Bestsellers</a>
-    </div>
-  </section>
+      <h1 class="mb-4">All Products</h1>
+      <p class="lead mb-5">Browse our full selection. Click a product for more details (demo only).</p>
 
-  <!-- Products Section -->
-  <section id="products" class="products py-5">
-    <div class="container">
-      <h2 class="section-title text-center mb-4">Featured Products</h2>
-
-      <!-- Product grid: CSS grid + Bootstrap responsive utilities -->
-      <div class="product-grid">
-        <!-- Product Card 1 -->
-        <article class="product-card card wow">
+      <div id="products" class="product-grid">
+        <!-- Reuse product cards; more space for details -->
+        <article class="product-card card">
           <a href="product-1.html" class="d-block" aria-label="View Comfy Chair details">
             <img src="https://images.unsplash.com/photo-1526178611600-4d5f6d8abf99?w=1200&q=80&auto=format&fit=crop" onerror="this.onerror=null;this.src='images/product-1.svg'" alt="Comfy Chair" class="card-img-top">
           </a>
           <div class="card-body">
             <h3 class="product-title"><a href="product-1.html" class="stretched-link text-decoration-none text-dark">Comfy Chair</a></h3>
-            <p class="product-desc">Ergonomic and chic, perfect for living rooms and studies.</p>
+            <p class="product-desc">A premium, ergonomic chair with supportive cushions and a minimalist silhouette. Available in multiple colors.</p>
             <a class="btn btn-outline-primary" href="product-1.html">Shop Now</a>
           </div>
         </article>
 
-        <!-- Product Card 2 -->
-        <article class="product-card card wow">
+        <article class="product-card card">
           <a href="product-2.html" class="d-block" aria-label="View Minimal Lamp details">
             <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&q=80&auto=format&fit=crop" onerror="this.onerror=null;this.src='images/product-2.svg'" alt="Minimal Lamp" class="card-img-top">
           </a>
           <div class="card-body">
             <h3 class="product-title"><a href="product-2.html" class="stretched-link text-decoration-none text-dark">Minimal Lamp</a></h3>
-            <p class="product-desc">Warm lighting to set the mood — simple and elegant design.</p>
+            <p class="product-desc">Adjustable, warm LED lamp with dimmer and a compact footprint. Ideal for desks and bedside tables.</p>
             <a class="btn btn-outline-primary" href="product-2.html">Shop Now</a>
           </div>
         </article>
 
-        <!-- Product Card 3 -->
-        <article class="product-card card wow">
+        <article class="product-card card">
           <a href="product-3.html" class="d-block" aria-label="View Cozy Blanket details">
             <img src="https://images.unsplash.com/photo-1499955085172-a104c9463ece?w=1200&q=80&auto=format&fit=crop" onerror="this.onerror=null;this.src='images/product-3.svg'" alt="Cozy Blanket" class="card-img-top">
           </a>
           <div class="card-body">
             <h3 class="product-title"><a href="product-3.html" class="stretched-link text-decoration-none text-dark">Cozy Blanket</a></h3>
-            <p class="product-desc">Soft, breathable, and perfect for chilly evenings.</p>
+            <p class="product-desc">Made from sustainable materials—breathable, soft, and easy to care for. Machine washable.</p>
             <a class="btn btn-outline-primary" href="product-3.html">Shop Now</a>
           </div>
         </article>
 
-        <!-- Product Card 4 -->
-        <article class="product-card card wow">
+        <article class="product-card card">
           <a href="product-4.html" class="d-block" aria-label="View Kitchen Set details">
             <img src="https://images.unsplash.com/photo-1582582494709-2f1b4a2d3b1b?w=1200&q=80&auto=format&fit=crop" onerror="this.onerror=null;this.src='images/product-4.svg'" alt="Kitchen Set" class="card-img-top">
           </a>
           <div class="card-body">
             <h3 class="product-title"><a href="product-4.html" class="stretched-link text-decoration-none text-dark">Kitchen Set</a></h3>
-            <p class="product-desc">Durable and beautiful cookware for everyday use.</p>
+            <p class="product-desc">Complete cookware set crafted from durable materials—designed for everyday cooking and easy cleaning.</p>
             <a class="btn btn-outline-primary" href="product-4.html">Shop Now</a>
           </div>
         </article>
       </div>
-
-      <!-- Call to action -->
-      <div class="text-center mt-5">
-        <a class="btn btn-lg btn-secondary" href="products.html">View All Products</a>
-      </div>
     </div>
-  </section>
+  </main>
 
-  <!-- About / Footer callout -->
-  <section id="about" class="about py-5 bg-light">
-    <div class="container text-center">
-      <h3>Why Choose Us</h3>
-      <p class="mb-0">We focus on quality, sustainability, and great customer service. Join thousands of happy customers!</p>
-      <p class="mt-3 small text-muted">This is a short About section — for the full About page <a href="about.html">click here</a>. <strong>Demo page.</strong></p>
-    </div>
-  </section>
-
-  <!-- Footer -->
   <footer class="site-footer py-4">
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
       <div class="footer-left">&copy; <span id="year"></span> Store. All rights reserved.</div>
@@ -131,10 +96,7 @@
     </div>
   </footer>
 
-  <!-- Bootstrap JS & small script for year -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
