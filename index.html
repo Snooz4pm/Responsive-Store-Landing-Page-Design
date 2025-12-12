@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Project: Restaurant & Travel Agency</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --restaurant-primary: #c62828;
+            --restaurant-secondary: #ff9800;
+            --travel-primary: #1565c0;
+            --travel-secondary: #4fc3f7;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Restaurant Styles */
+        .restaurant-page {
+            background-color: #fff8f0;
+        }
+        
+        .restaurant-navbar {
+            background-color: var(--restaurant-primary) !important;
+        }
+        
+        .restaurant-navbar .navbar-brand, 
+        .restaurant-navbar .nav-link {
+            color: white !important;
+        }
+        
+        .restaurant-navbar .nav-link:hover {
+            color: var(--restaurant-secondary) !important;
+        }
+        
+        .restaurant-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            color: white;
+        }
+        
+        .menu-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .menu-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .menu-price {
+            color: var(--restaurant-primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .restaurant-about {
+            background-color: #f5f5f5;
+        }
+        
+        .restaurant-contact {
+            background-color: white;
+        }
+        
+        .btn-restaurant {
+            background-color: var(--restaurant-primary);
+            color: white;
+        }
+        
+        .btn-restaurant:hover {
+            background-color: #b71c1c;
+            color: white;
+        }
+        
+        .restaurant-footer {
+            background-color: #333;
+            color: white;
+        }
+        
+        /* Travel Agency Styles */
+        .travel-page {
+            background-color: #f0f8ff;
+        }
+        
+        .travel-navbar {
+            background-color: var(--travel-primary) !important;
+        }
+        
+        .travel-navbar .navbar-brand, 
+        .travel-navbar .nav-link {
+            color: white !important;
+        }
+        
+        .travel-navbar .nav-link:hover {
+            color: var(--travel-secondary) !important;
+        }
+        
+        .travel-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            color: white;
+        }
+        
+        .travel-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .travel-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .travel-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: var(--travel-primary);
+            color: white;
+        }
+        
+        .btn-travel {
+            background-color: var(--travel-primary);
+            color: white;
+        }
+        
+        .btn-travel:hover {
+            background-color: #0d47a1;
+            color: white;
+        }
+        
+        .travel-footer {
+            background-color: #263238;
+            color: white;
+        }
+        
+        /* Page switcher: move to bottom-center and improve appearance */
+        /* Page switcher is placed in the normal document flow at the top center
+           (it will not follow the user while scrolling). */
+        .page-switcher {
+            position: static; /* not fixed so it scrolls away with the page */
+            margin: 18px auto 0; /* center horizontally, small top offset */
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 999px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            max-width: calc(100% - 40px);
+        }
+
+        .page-switcher .btn {
+            border-radius: 999px;
+            padding: 0.6rem 1rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        /* Larger tap targets on small screens */
+        @media (max-width: 576px) {
+            .page-switcher { padding: 8px; }
+            .page-switcher .btn { padding: 0.9rem 1.1rem; font-size: 0.95rem; }
+        }
+        
+        /* Section headers */
+        .section-header {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .section-header:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+        }
+        
+        .restaurant-page .section-header:after {
+            background-color: var(--restaurant-primary);
+        }
+        
+        .travel-page .section-header:after {
+            background-color: var(--travel-primary);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .restaurant-hero, .travel-hero {
+                height: 50vh;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Switcher -->
+    <!--
+        Accessibility & placement notes:
+        - This switcher is positioned at the top-center for easy visibility and reach.
+        - On larger screens it is nudged down slightly to avoid overlapping the navbar.
+        - Buttons include icons and `aria-pressed` attributes for screen readers.
+        - To move it to another corner, edit `.page-switcher` (e.g., set `top:20px; right:20px; left:auto; transform:none;` to place it top-right).
+        - To hide text labels permanently, remove the `d-none d-sm-inline` spans inside each button.
+    -->
+    <div class="page-switcher" aria-label="Switch between Restaurant and Travel pages">
+        <div class="btn-group" role="group" aria-label="Page switcher">
+            <button type="button" id="showRestaurant" class="btn btn-danger" aria-pressed="false" title="View the restaurant site">
+                <i class="bi bi-cup-hot-fill me-2" aria-hidden="true"></i>
+                <span class="d-none d-sm-inline">Restaurant</span>
+            </button>
+            <button type="button" id="showTravel" class="btn btn-primary" aria-pressed="false" title="View the travel agency site">
+                <i class="bi bi-airplane-engines-fill me-2" aria-hidden="true"></i>
+                <span class="d-none d-sm-inline">Travel</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Restaurant Page -->
+    <div id="restaurantPage" class="restaurant-page">
+        <!-- Header/Navbar -->
+        <nav class="navbar navbar-expand-lg restaurant-navbar">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#"><i class="bi bi-cup-hot-fill me-2"></i>Gusto Italiano</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#restaurantNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="restaurantNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#menu">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="restaurant-hero d-flex align-items-center">
+            <div class="container">
+                <div class="hero-content text-center text-white">
+                    <h1 class="display-4 fw-bold mb-4">Authentic Italian Cuisine</h1>
+                    <p class="lead mb-4">Experience the taste of Italy with our handcrafted dishes made from traditional recipes.</p>
+                    <a href="#menu" class="btn btn-restaurant btn-lg px-5">View Our Menu</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="py-5">
+            <div class="container">
+                <h2 class="text-center section-header">Our Specialties</h2>
+                <div class="row g-4">
+                    <!-- Menu Item 1 -->
+                    <div class="col-md-4">
+                        <div class="card menu-card h-100">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1381&q=80" class="card-img-top" alt="Pizza Margherita">
+                            <div class="card-body">
+                                <h5 class="card-title">Pizza Margherita</h5>
+                                <p class="card-text">Classic Neapolitan pizza with San Marzano tomatoes, fresh mozzarella, basil, and extra-virgin olive oil.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="menu-price">$14.99</span>
+                                    <a href="demo.html?from=order" class="btn btn-restaurant">Order Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Menu Item 2 -->
+                    <div class="col-md-4">
+                        <div class="card menu-card h-100">
+                            <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Pasta Carbonara">
+                            <div class="card-body">
+                                <h5 class="card-title">Pasta Carbonara</h5>
+                                <p class="card-text">Traditional Roman pasta dish with eggs, Pecorino Romano cheese, pancetta, and black pepper.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="menu-price">$16.99</span>
+                                    <a href="demo.html?from=order" class="btn btn-restaurant">Order Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Menu Item 3 -->
+                    <div class="col-md-4">
+                        <div class="card menu-card h-100">
+                            <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Tiramisu">
+                            <div class="card-body">
+                                <h5 class="card-title">Tiramisu</h5>
+                                <p class="card-text">Classic Italian dessert made of ladyfingers dipped in coffee, layered with mascarpone cream.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="menu-price">$8.99</span>
+                                    <a href="demo.html?from=order" class="btn btn-restaurant">Order Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="restaurant-about py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
+                             alt="Restaurant Interior" class="img-fluid rounded shadow">
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="section-header">Our Story</h2>
+                        <p class="lead">Since 1995, Gusto Italiano has been serving authentic Italian cuisine made from family recipes passed down through generations.</p>
+                        <p>Our chefs use only the finest imported ingredients from Italy, combined with local fresh produce to create dishes that honor traditional Italian cooking while adding a contemporary touch.</p>
+                        <p>We believe in the Italian philosophy of "la dolce vita" - the sweet life - and strive to create an atmosphere where our guests can relax, enjoy good food, and make lasting memories.</p>
+                        <a href="#contact" class="btn btn-restaurant mt-3">Visit Us Today</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="restaurant-contact py-5">
+            <div class="container">
+                <h2 class="text-center section-header">Contact Us</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-restaurant btn-lg w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="restaurant-footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2023 Gusto Italiano. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-twitter fs-4"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Travel Agency Page (Initially Hidden) -->
+    <div id="travelPage" class="travel-page d-none">
+        <!-- Header/Navbar -->
+        <nav class="navbar navbar-expand-lg travel-navbar">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#"><i class="bi bi-airplane-engines-fill me-2"></i>Wanderlust Adventures</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#travelNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="travelNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#travelHome">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#destinations">Destinations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tours">Tours</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#travelContact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="travelHome" class="travel-hero d-flex align-items-center">
+            <div class="container">
+                <div class="hero-content text-center text-white">
+                    <h1 class="display-4 fw-bold mb-4">Discover Your Next Adventure</h1>
+                    <p class="lead mb-4">Explore breathtaking destinations with our expertly curated travel experiences.</p>
+                    <a href="#destinations" class="btn btn-travel btn-lg px-5">Explore Destinations</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destinations Section -->
+        <section id="destinations" class="py-5">
+            <div class="container">
+                <h2 class="text-center section-header">Popular Destinations</h2>
+                <div class="row g-4">
+                    <!-- Destination 1 -->
+                    <div class="col-md-4">
+                        <div class="card travel-card h-100">
+                            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Bali, Indonesia">
+                            <div class="card-body">
+                                <h5 class="card-title">Bali, Indonesia</h5>
+                                <p class="card-text">Known as the Island of the Gods, Bali is famous for its forested volcanic mountains, iconic rice paddies, beaches and coral reefs.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-primary fw-bold">From $1,299</span>
+                                    <a href="demo.html?from=learn" class="btn btn-travel">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Destination 2 -->
+                    <div class="col-md-4">
+                        <div class="card travel-card h-100">
+                            <img src="https://images.unsplash.com/photo-1534008897995-27a23e859048?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" class="card-img-top" alt="Swiss Alps">
+                            <div class="card-body">
+                                <h5 class="card-title">Swiss Alps</h5>
+                                <p class="card-text">Experience breathtaking mountain scenery, charming villages, and world-class skiing in the heart of the Swiss Alps.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-primary fw-bold">From $2,199</span>
+                                    <a href="demo.html?from=learn" class="btn btn-travel">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Destination 3 -->
+                    <div class="col-md-4">
+                        <div class="card travel-card h-100">
+                            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1386&q=80" class="card-img-top" alt="Kyoto, Japan">
+                            <div class="card-body">
+                                <h5 class="card-title">Kyoto, Japan</h5>
+                                <p class="card-text">Discover ancient temples, traditional tea houses, and stunning cherry blossoms in Japan's cultural capital.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-primary fw-bold">From $1,899</span>
+                                    <a href="demo.html?from=learn" class="btn btn-travel">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tours Section -->
+        <section id="tours" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center section-header">Tour Packages</h2>
+                <div class="accordion" id="toursAccordion">
+                    <!-- Tour 1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tourOne">
+                                <strong>European Explorer</strong> - 14 Days, 8 Cities
+                            </button>
+                        </h2>
+                        <div id="tourOne" class="accordion-collapse collapse show" data-bs-parent="#toursAccordion">
+                            <div class="accordion-body">
+                                <p>Visit Paris, Amsterdam, Berlin, Prague, Vienna, Budapest, Venice, and Rome on this comprehensive European tour. Includes flights, accommodations, guided tours, and breakfast daily.</p>
+                                <p><strong>Highlights:</strong> Eiffel Tower, Anne Frank House, Berlin Wall, Charles Bridge, Hungarian Parliament, Colosseum</p>
+                                <p class="text-primary fw-bold">Price: $3,499 per person</p>
+                                <a href="demo.html?from=view" class="btn btn-travel">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tour 2 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tourTwo">
+                                <strong>Safari Adventure</strong> - 10 Days in Kenya & Tanzania
+                            </button>
+                        </h2>
+                        <div id="tourTwo" class="accordion-collapse collapse" data-bs-parent="#toursAccordion">
+                            <div class="accordion-body">
+                                <p>Experience the wildlife of Africa with game drives in Maasai Mara, Serengeti, and Ngorongoro Crater. Stay in luxury lodges and tented camps.</p>
+                                <p><strong>Highlights:</strong> Great Migration, Big Five wildlife, Maasai cultural experience, hot air balloon safari</p>
+                                <p class="text-primary fw-bold">Price: $4,299 per person</p>
+                                <a href="demo.html?from=view" class="btn btn-travel">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tour 3 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tourThree">
+                                <strong>Southeast Asia Discovery</strong> - 21 Days, 5 Countries
+                            </button>
+                        </h2>
+                        <div id="tourThree" class="accordion-collapse collapse" data-bs-parent="#toursAccordion">
+                            <div class="accordion-body">
+                                <p>Journey through Thailand, Cambodia, Vietnam, Laos, and Myanmar. Explore ancient temples, bustling markets, and tranquil landscapes.</p>
+                                <p><strong>Highlights:</strong> Angkor Wat, Halong Bay, Luang Prabang, Bagan temples, Thai cooking class</p>
+                                <p class="text-primary fw-bold">Price: $2,999 per person</p>
+                                <a href="demo.html?from=view" class="btn btn-travel">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section id="travelContact" class="py-5">
+            <div class="container">
+                <h2 class="text-center section-header">Plan Your Trip</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-8">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="travelName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="travelName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="travelEmail" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="travelEmail" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="destinationInterest" class="form-label">Destination of Interest</label>
+                                <select class="form-select" id="destinationInterest" required>
+                                    <option value="" selected disabled>Select a destination</option>
+                                    <option value="bali">Bali, Indonesia</option>
+                                    <option value="swiss-alps">Swiss Alps</option>
+                                    <option value="kyoto">Kyoto, Japan</option>
+                                    <option value="europe">European Explorer</option>
+                                    <option value="africa">Safari Adventure</option>
+                                    <option value="asia">Southeast Asia Discovery</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="travelMessage" class="form-label">Message</label>
+                                <textarea class="form-control" id="travelMessage" rows="4" placeholder="Tell us about your travel preferences, dates, and any special requests..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-travel btn-lg w-100">Submit Inquiry</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="travel-footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2023 Wanderlust Adventures. All rights reserved.</p>
+                        <p class="mb-0 small">Travel responsibly and respect local cultures.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-twitter fs-4"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube fs-4"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Page Switcher Functionality
+        // Page switcher: set active states and ARIA attributes for accessibility
+        const showRestaurantBtn = document.getElementById('showRestaurant');
+        const showTravelBtn = document.getElementById('showTravel');
+
+        function setActiveButton(activeBtn) {
+            const otherBtn = (activeBtn === showRestaurantBtn) ? showTravelBtn : showRestaurantBtn;
+
+            // Visual active state
+            activeBtn.classList.add('active');
+            otherBtn.classList.remove('active');
+
+            // ARIA pressed state
+            activeBtn.setAttribute('aria-pressed', 'true');
+            otherBtn.setAttribute('aria-pressed', 'false');
+        }
+
+        showRestaurantBtn.addEventListener('click', function() {
+            document.getElementById('restaurantPage').classList.remove('d-none');
+            document.getElementById('travelPage').classList.add('d-none');
+            setActiveButton(this);
+            this.focus();
+        });
+
+        showTravelBtn.addEventListener('click', function() {
+            document.getElementById('travelPage').classList.remove('d-none');
+            document.getElementById('restaurantPage').classList.add('d-none');
+            setActiveButton(this);
+            this.focus();
+        });
+
+        // Initialize with Restaurant page visible and ARIA state
+        setActiveButton(showRestaurantBtn);
+        
+        // Form submission handlers
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your submission! This is a demo page, so no actual data was sent.');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
